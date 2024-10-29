@@ -10,4 +10,4 @@ jobs:
 
     steps:
       - run: |
-          echo "{markdown content}" >> $GITHUB_STEP_SUMMARY
+          echo '<img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fsteamcommunity.com%2Fsharedfiles%2Ffiledetails%2F%3Fid%3D491024717&psig=AOvVaw1f0Ysmduiay28-rSmYIFb4&ust=1730290515086000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCKjo5s_Is4kDFQAAAAAdAAAAABAE" alt="Image" width="300">' >> "$GITHUB_STEP_SUMMARY"
