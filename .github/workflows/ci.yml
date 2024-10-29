@@ -5,13 +5,15 @@ on:
   workflow_dispatch:
 
 jobs:
-  install:
+  first:
     runs-on: [ windows-latest ]
-
     steps:
       - name: Adding markdown
         run: echo '### Hello world! 🚀' >> $GITHUB_STEP_SUMMARY
 
+  second:
+    runs-on: [ windows-latest ]
+    steps:
       - name: Images markdown
         run: |
           echo "<img src='https://steamuserimages-a.akamaihd.net/ugc/436073184353221196/D2F0B7F99370F71CC6E6593A658BB11B05177070/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false' alt='Image' width='100%'>" >> "$GITHUB_STEP_SUMMARY"
