@@ -20,6 +20,7 @@ jobs:
           echo "![Image](https://steamuserimages-a.akamaihd.net/ugc/436073184353221196/D2F0B7F99370F71CC6E6593A658BB11B05177070/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false)" >> "$GITHUB_STEP_SUMMARY"
 
   third:
+    runs-on: [ ubuntu-latest ]
     steps:
       - name: Generate list using Markdown
         run: |
