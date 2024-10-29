@@ -19,3 +19,7 @@ jobs:
             echo "| Environment         | BBBBB |"
             echo "| Cluster             | CCCCC |"
           } >> $GITHUB_STEP_SUMMARY
+
+      - name: run another test
+        run: |
+          echo "{markdown content}" >> $GITHUB_STEP_SUMMARY
