@@ -1,0 +1,21 @@
+name: Test Summary Steps
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  install:
+    runs-on: [ windows-latest ]
+
+    steps:
+      - name: run stuffs
+        run: |
+          {
+            echo "### :rocket: Workflow inputs"
+            echo "| Arg                 | Value |"
+            echo "| ------------------- | ----- |"
+            echo "| Print inputs        | AAAAA |"
+            echo "| Environment         | BBBBB |"
+            echo "| Cluster             | CCCCC |"
+          } >> $GITHUB_STEP_SUMMARY
