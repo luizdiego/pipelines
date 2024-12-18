@@ -28,7 +28,9 @@ jobs:
           ${{ runner.os }}-maven-
 
     - name: Install dependencies and deploy
-      run: mvn deploy
+      run: |
+        mvn install:install-file "-DgroupId=com.luizdiego" "-DartifactId=hello-world" "-Dversion=0.0.1" "-Dpackaging=jar" "-Dfile=hello-world.jar" "-DcreateChecksum=true"
+        mvn deploy
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GIT_BRANCH: ${{ github.ref_name }}
