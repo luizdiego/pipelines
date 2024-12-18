@@ -2,18 +2,7 @@ name: Maven Deploy
 
 on:
   push:
-    branches:
-      - main
   workflow_dispatch:
-    inputs:
-        branch:
-            description: 'Branch to deploy'
-            required: true
-            default: 'main'
-        package_version:
-            description: 'Package version to deploy'
-            required: true
-            default: '0.0.1'
 
 jobs:
   deploy:
