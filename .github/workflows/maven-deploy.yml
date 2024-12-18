@@ -29,9 +29,9 @@ jobs:
 
     - name: Install dependencies and deploy
       run: |
-        mvn install -f  .\hello-world\
+        mvn install -f hello-world/
         # mvn install:install-file "-DgroupId=com.luizdiego" "-DartifactId=hello-world" "-Dversion=0.0.1" "-Dpackaging=jar" "-Dfile=hello-world.jar" "-DcreateChecksum=true"
-        mvn deploy -f .\hello-world\
+        mvn deploy -f hello-world/
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         GIT_BRANCH: ${{ github.ref_name }}
