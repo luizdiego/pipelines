@@ -37,6 +37,12 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-maven-
 
+    - name: Extract version from pom.xml
+      id: extract-version
+      run: |
+        VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout -f hello-world/pom.xml)
+        echo "VERSION=$VERSION" >> $GITHUB_ENV
+
     - name: Install dependencies and deploy
       run: |
         mvn versions:set "-DnewVersion=${{ github.event.inputs.package_version }}" -f hello-world/
