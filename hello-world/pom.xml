@@ -8,11 +8,8 @@
     <artifactId>hello-world</artifactId>
     <packaging>jar</packaging>
     <version>0.0.3-SNAPSHOT</version>
-<!--    <build>-->
-<!--        <finalName>hello-world</finalName>-->
-<!--    </build>-->
     <name>hello-world</name>
-<!--    <url>http://maven.apache.org</url>-->
+
     <properties>
         <java.version>21</java.version>
         <encoding.version>UTF-8</encoding.version>
@@ -21,6 +18,7 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
