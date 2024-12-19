@@ -7,7 +7,7 @@
     <groupId>com.luizdiego</groupId>
     <artifactId>hello-world</artifactId>
     <packaging>jar</packaging>
-    <version>0.0.3-SNAPSHOT</version>
+    <version>0.0.4-SNAPSHOT</version>
     <name>hello-world</name>
 
     <properties>
