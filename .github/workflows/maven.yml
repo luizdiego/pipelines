@@ -33,7 +33,7 @@ jobs:
 
     steps:
       - name: Fails if tag and feature are not present
-        if: "${{ github.event.inputs.testTag == '' }} && ${{ github.event.inputs.testFeature == '' }}"
+        if: "${{ github.event.inputs.testTag }} && ${{ github.event.inputs.testFeature }}"
         run: |
           echo "No inputs provided"
           exit 1
