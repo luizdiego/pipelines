@@ -1,0 +1,60 @@
+name: Run Maven Tests with Options
+
+on:
+  workflow_dispatch:
+    inputs:
+      testTag:
+        description: 'Tags to filter scenarios. Multiple tags can be used adding the work OR between them.'
+        required: false
+        default: ''
+        type: string
+      testFeature:
+        description: 'Run a specific feature file. Also supports the use of wildcards.'
+        required: false
+        default: ''
+        type: string
+
+jobs:
+  run-smoke-tests:
+    runs-on: [ windows-latest ]
+    steps:
+      - name: Fails if tag and feature are not present
+        if: "${{ github.event.inputs.testTag == '' }} && ${{ github.event.inputs.testFeature == '' }}"
+        run: |
+          echo "No inputs provided"
+          exit 1
+  
+      - uses: actions/checkout@v4
+        with:
+          set-safe-directory: false
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'corretto'
+          cache: 'maven'
+
+      - name: Install dependencies
+        run: mvn clean install -D skipTests
+
+      - name: Run tests by test tag
+        if: " ${{ github.event.inputs.testTag }} "
+        run: |
+          echo "Using tags: ${{ github.event.inputs.testTag }}"
+          mvn test -Dcucumber.filter.tags="${{ github.event.inputs.testTag }}" -Denvironment=qa -Dbrowser=chrome -Dheadless=true
+
+      - name: Run tests by feature path
+        if: " ${{ github.event.inputs.testFeature }} "
+        run: |
+          echo "Using classpath: ${{ github.event.inputs.testFeature }}"
+          mvn test -Dcucumber.features="${{ github.event.inputs.testFeature }}" -Denvironment=qa -Dbrowser=chrome -Dheadless=true
+
+      - name: Upload output artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: outputs
+          path: |
+            ./target/
+            ./screenshots/
