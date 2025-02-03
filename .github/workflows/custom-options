@@ -1,6 +1,7 @@
 name: Run Maven Tests with Options
 
 on:
+  push:
   workflow_dispatch:
     inputs:
       testTag:
@@ -9,7 +10,7 @@ on:
         default: ''
         type: string
       testFeature:
-        description: 'Run a specific feature file. Also supports the use of wildcards.'
+        description: 'Run a specific feature file. Also supports the use of multiple paths.'
         required: false
         default: ''
         type: string
@@ -23,7 +24,7 @@ jobs:
         run: |
           echo "No inputs provided"
           exit 1
-  
+
       - uses: actions/checkout@v4
         with:
           set-safe-directory: false
@@ -42,19 +43,10 @@ jobs:
         if: " ${{ github.event.inputs.testTag }} "
         run: |
           echo "Using tags: ${{ github.event.inputs.testTag }}"
-          mvn test -Dcucumber.filter.tags="${{ github.event.inputs.testTag }}" -Denvironment=qa -Dbrowser=chrome -Dheadless=true
+          mvn test -Dcucumber.filter.tags="${{ github.event.inputs.testTag }}"
 
       - name: Run tests by feature path
         if: " ${{ github.event.inputs.testFeature }} "
         run: |
           echo "Using classpath: ${{ github.event.inputs.testFeature }}"
-          mvn test -Dcucumber.features="${{ github.event.inputs.testFeature }}" -Denvironment=qa -Dbrowser=chrome -Dheadless=true
-
-      - name: Upload output artifacts
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: outputs
-          path: |
-            ./target/
-            ./screenshots/
+          mvn test -Dcucumber.features="${{ github.event.inputs.testFeature }}"
